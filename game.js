@@ -188,7 +188,7 @@
 
 	var curLvl = 0;
 	function start() {
-		rw.init(320,240).setFPS(30);
+		rw.init(320,240, 'playarea').setFPS(30);
 		rw.start();
 		makeGame(curLvl);
 	};
