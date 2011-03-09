@@ -36,7 +36,7 @@
 			[6,6,6,6,6,1,1,1,1,1,1,1,1,1,1,1,1,6,6,6],
 			[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6],
 			[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6]
-		[, [
+		], [
 			[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6],
 			[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6],
 			[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6],
@@ -194,14 +194,6 @@
 		}
 		this.base = new rw.Rule(true,0);
 		this.rule = function() {
-			if (keyDelay==0) {
-				(rw.key('ua')) ? (checkMove('u'), keyDelay=5) :
-				(rw.key('da')) ? (checkMove('d'), keyDelay=5) :
-				(rw.key('ra')) ? (checkMove('r'), keyDelay=5) :
-				(rw.key('la')) ? (checkMove('l'), keyDelay=5) : true;
-			} else {
-				keyDelay--;
-			}
 			var victory = true;
 			for (var y=0, ylen=this.lvl.length; y<ylen; y++) {
 				for (var x=0, xlen=this.lvl.length; x<xlen; x++) {
@@ -210,13 +202,21 @@
 			}
 			if (victory) {
 				if (curLvl<lvls.length-1){
-					//alert("Level "+(curLvl+1)+" vanquished!");
 					makeGame(++curLvl);
 				} else {
 					rw.stop(function() {
 						alert('victory is yours!');
 					});
 				}
+			}
+			if (keyDelay==0) {
+				(rw.key('ua')) ? (checkMove('u'), keyDelay=5) :
+				(rw.key('da')) ? (checkMove('d'), keyDelay=5) :
+				(rw.key('ra')) ? (checkMove('r'), keyDelay=5) :
+				(rw.key('la')) ? (checkMove('l'), keyDelay=5) : 
+				(rw.key('r')) ? makeGame(curLvl) : true;
+			} else {
+				keyDelay--;
 			}
 		}
 	}
