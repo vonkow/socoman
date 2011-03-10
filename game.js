@@ -214,7 +214,9 @@
 				(rw.key('da')) ? (checkMove('d'), keyDelay=5) :
 				(rw.key('ra')) ? (checkMove('r'), keyDelay=5) :
 				(rw.key('la')) ? (checkMove('l'), keyDelay=5) : 
-				(rw.key('r')) ? makeGame(curLvl) : true;
+				(rw.key('r')) ? makeGame(curLvl) :
+				(rw.key('n')) ? checkMake(curLvl+1) :
+				(rw.key('b')) ? checkMake(curLvl-1) : true;
 			} else {
 				keyDelay--;
 			}
@@ -242,6 +244,19 @@
 			this.base.changeSprite(img);
 		}
 	};
+
+	function checkMake(lv) {
+		if (lv>=0) {
+			if (lv<lvls.length) {
+				curLvl = lv;
+				makeGame(curLvl);
+			} else {
+				makeGame(curLvl);
+			}
+		} else {
+			makeGame(curLvl);
+		}
+	}
 
 	function makeGame(lv) {
 		rw.stop(function() {
